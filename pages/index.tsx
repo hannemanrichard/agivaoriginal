@@ -1,11 +1,72 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from "next/head";
+import { Inter } from "@next/font/google";
+import bg from "../public/background.jpg";
+import Image from "next/image";
+import { useState } from "react";
+import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
+import { db } from "../firebase-config";
+import { useRouter } from "next/router";
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [fullName, setFullName] = useState("");
+  const [address, setAddress] = useState("");
+  const [offer, setOffer] = useState(1);
+  const [province, setProvince] = useState("");
+  const [number, setNumber] = useState("");
+  const [nameErr, setNameErr] = useState(false);
+  const [numberErr, setNumberErr] = useState(false);
+  const [provinceErr, setProvinceErr] = useState(false);
+  const [formErr, setFormErr] = useState(false);
+  const router = useRouter();
+
+  const handleAddLead = async (e: any) => {
+    e.preventDefault();
+    if (fullName !== "" && province !== "" && number !== "") {
+      try {
+        const leadsRef = collection(db, "leads");
+        const offerValue = offer === 2 ? "oil + champoing" : "oil";
+        setFormErr(false);
+        await addDoc(leadsRef, {
+          fullName,
+          address,
+          province,
+          number,
+          timestamp: serverTimestamp(),
+          offer: offerValue,
+        });
+
+        router.push("/thankyou");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setFormErr(true);
+    }
+  };
+
+  const handleSetError = (field: string) => {
+    if (field == "name") {
+      if (fullName === "") {
+        setNameErr(true);
+      } else {
+        setNameErr(false);
+      }
+    } else if (field === "number") {
+      if (number === "") {
+        setNumberErr(true);
+      } else {
+        setNumberErr(false);
+      }
+    } else if (field === "province") {
+      if (province === "") {
+        setProvinceErr(true);
+      } else {
+        setProvinceErr(false);
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -14,110 +75,362 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+      <div
+        className="bg-auto bg-no-repeat bg-center"
+        style={{
+          backgroundImage: `url(${bg.src})`,
+          // backgroundSize: "100%",
+          backgroundAttachment: "fixed",
+          backgroundColor: "#333",
+          backgroundBlendMode: "overlay",
+        }}
+      >
+        <header className="bg-black fixed top-0 h-20 w-full">
+          <div className="w-full flex justify-between px-3 py-3">
+            <div className="py-3">
+              <img src="logo.avif" className="h-8" alt="" />
+            </div>
+            <div className=" mt-3">
+              <a
+                href="#form"
+                className="text-white bg-red-700 px-6 py-3 rounded-lg font-bold"
+              >
+                أطلب الآن
+              </a>
+            </div>
           </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
+        </header>
+        <main className="w-full  mt-20 px-6">
+          <div className="w-full pt-4 pb-8 text-center text-white z-10 mt-4">
+            <h1 className="text-5xl mb-2">
+              أحصل على لحية مميزة في أسابيع قليلة
+            </h1>
+            <h6 className="text-2xl">
+              الزيت الأصلي من شركة أجيفا العالمية الذي يساعد على تعزيز نمو شعر
+              اللحية بشكل صحي وملئ الفراغات
+            </h6>
           </div>
-        </div>
+          <iframe
+            src="https://player.vimeo.com/video/783998584?h=8d05ccf298"
+            // width="640"
+            className="w-full  rounded-2xl overflow-hidden md:hidden mb-4"
+            height="360"
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+          ></iframe>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
+          <div className="grid gap-12 md:grid-cols-2">
+            <div className="w-full hidden md:block">
+              <iframe
+                // width="560"
+                height="215"
+                className="w-full  rounded-2xl overflow-hidden"
+                src="https://player.vimeo.com/video/783998584?h=8d05ccf298"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+              <div className="text-white text-right mt-4">
+                <h1 className="text-xl mb-2">
+                  هل تعاني من الفرغات في اللحية ؟ او تريد الحصول على لحية مميزة؟
+                </h1>
+                <p>
+                  نقدم لكم الزيت الأصلي من شركة أجيفا العالمية الذي يساعد على
+                  تعزيز نمو شعر اللحية بشكل صحي وملئ الفراغات خصوصا الأشخاص
+                  للذين يعانون من فراغات اللحية كما انه يساعد على نمو اسرع ب 5
+                  اضعاف والحفاظ على لمعان شعر اللحية
+                </p>
+              </div>
+              <div className="text-white text-right mt-8">
+                <h1 className="text-xl mb-2">
+                  :زيت اللحية لأجيفا يتكون من 4 زيوت{" "}
+                </h1>
+                <div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت الأرغان يغدي اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      1
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت اللوز يقوي من شعر اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      2
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت اللوز يقوي من شعر اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      3
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت جوز الهند يساعد على لمعان شعر اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      4
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between hidden">
+                <Image
+                  src="/arrowdown.png"
+                  width={72}
+                  height={72}
+                  alt=""
+                  className="-scale-x-100"
+                />
+                <Image src="/arrowdown.png" width={72} height={72} alt="" />
+              </div>
+              <div
+                className="bg-[#1f1f1f] rounded-2xl border-2 py-4 px-6 border-[#dc111f]"
+                id="form"
+              >
+                <h1 className="text-3xl text-white font-bold text-center">
+                  أطلب الآن
+                </h1>
+                <h3 className="text-lg text-white text-center">
+                  للطلب يرجى ملأ هذا النموذج وسوف نتصل بك لتاكيد{" "}
+                </h3>
+                <form action="#" method="post">
+                  <div>
+                    <label className="label w-full text-right block mt-3">
+                      <span className="label-text text-white right-0">
+                        الإسم و اللقب
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
+                      placeholder="الإسم و اللقب"
+                      value={fullName}
+                      onBlur={() => handleSetError("name")}
+                      required
+                      onChange={(e) => setFullName(e.target.value)}
+                    />
+                    {nameErr && (
+                      <p className="text-right text-red-600">ادخل الاسم</p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="label w-full text-right block mt-3">
+                      <span className="label-text text-white">رقم الهاتف</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="p-3 mt-2 bg-white rounded-md w-full  text-right"
+                      placeholder="رقم الهاتف"
+                      value={number}
+                      onBlur={() => handleSetError("number")}
+                      required
+                      onChange={(e) => setNumber(e.target.value)}
+                    />
+                    {numberErr && (
+                      <p className="text-right text-red-600">
+                        الرجاء إدخال رقم الهاتف
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="label w-full text-right block mt-3">
+                      <span className="label-text text-white">الولاية</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
+                      placeholder="الولاية"
+                      value={province}
+                      onBlur={() => handleSetError("province")}
+                      required
+                      onChange={(e) => setProvince(e.target.value)}
+                    />
+                    {provinceErr && (
+                      <p className="text-right text-red-600">
+                        الرجاء إدخال الولاية
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="label w-full text-right block mt-3">
+                      <span className="label-text text-white">العنوان</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
+                      placeholder="العنوان"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
 
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
+                  <div>
+                    <label className="label w-full text-right block mt-3">
+                      <span className="label-text text-white">العرض</span>
+                    </label>
 
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
+                    <div>
+                      <div className="flex justify-end">
+                        <p className="text-white text-right mr-3">
+                          (3800 DA) %زيت اللحية مع تخفيض 25
+                        </p>
+                        <input
+                          type="radio"
+                          value="oil"
+                          checked={offer === 1}
+                          name="offer"
+                          onClick={(e) => setOffer(1)}
+                        />{" "}
+                      </div>
+                      <div className="flex justify-end">
+                        <p className="text-white text-right mr-3">
+                          (5800 DA) زيت اللحية + شامبوا و توصيل مجاني
+                        </p>
+                        <input
+                          type="radio"
+                          value="oil_champ"
+                          name="offer"
+                          checked={offer === 2}
+                          onClick={(e) => setOffer(2)}
+                        />{" "}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="py-4 border-b border-white/20">
+                    <div className="flex justify-between text-white">
+                      {offer == 1 ? <p>3800 DA</p> : <p>5800 DA</p>}
+                      <p>سعر الطلبية</p>
+                    </div>
+                    <div className="flex justify-between text-white">
+                      {offer == 1 ? <p>600 DA</p> : <p>0 DA</p>}
+                      <p>سعر التوصيل</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between  text-xl mt-2 text-white">
+                    {offer == 1 ? <p>4400 DA</p> : <p>5800 DA</p>}
+                    <p>السعر الإجمالي</p>
+                  </div>
+                  <div>
+                    {formErr && (
+                      <p className="text-center text-white bg-red-600/60 py-3 rounded-lg mt-4">
+                        الرجاء إدخال جميع المعلومات
+                      </p>
+                    )}
+                  </div>
+                  <div className="mt-4">
+                    <button
+                      // disabled={!fullName || !number || !province}
+                      onClick={handleAddLead}
+                      type="submit"
+                      className="bg-[#dc111f] button-bounce text-2xl rounded-lg w-full p-4 text-center text-white font-bold hover:bg-[#cf0c19]"
+                    >
+                      أطلب الآن
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div className="w-full block md:hidden">
+              {/* <iframe
+                // width="560"
+                height="315"
+                className="w-full  rounded-2xl overflow-hidden"
+                src="https://www.youtube.com/embed/cB2vnyM5sEM"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe> */}
+              <div className="text-white text-right mt-4">
+                <h1 className="text-xl mb-2">
+                  هل تعاني من الفرغات في اللحية ؟ او تريد الحصول على لحية مميزة؟
+                </h1>
+                <p>
+                  نقدم لكم الزيت الأصلي من شركة أجيفا العالمية الذي يساعد على
+                  تعزيز نمو شعر اللحية بشكل صحي وملئ الفراغات خصوصا الأشخاص
+                  للذين يعانون من فراغات اللحية كما انه يساعد على نمو اسرع ب 5
+                  اضعاف والحفاظ على لمعان شعر اللحية
+                </p>
+              </div>
+              <div className="text-white text-right mt-8">
+                <h1 className="text-xl mb-2">
+                  :زيت اللحية لأجيفا يتكون من 4 زيوت{" "}
+                </h1>
+                <div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت الأرغان يغدي اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      1
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت اللوز يقوي من شعر اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      2
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت اللوز يقوي من شعر اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      3
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> زيت جوز الهند يساعد على لمعان شعر اللحية</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      4
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-end my-6">
+                <img src="/results.png" />
+              </div>
+              <div className="text-white text-right mt-8 mb-6">
+                <h1 className="text-xl mb-2">:طريقة الإستعمال </h1>
+                <div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> تغسل اللحية جيدا بالماء والغسول</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      1
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span> تقوم بتجفيفها جيدا من الماء</span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      2
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span>
+                      {" "}
+                      تضع قطرات من زيت أجيفا ثم تقوم بتدليك اللحية جيدا لمدة 2
+                      دقيقة
+                    </span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      3
+                    </span>
+                  </div>
+                  <div className="flex text-right w-full justify-end mt-3">
+                    <span>
+                      {" "}
+                      تقوم بتكرير العملية يوميا والمداومة عليها لتظهر النتيجة في
+                      وقت قصير
+                    </span>
+                    <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
+                      4
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+          <div></div>
+        </main>
+      </div>
     </>
-  )
+  );
 }
