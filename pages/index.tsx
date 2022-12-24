@@ -1,12 +1,10 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import bg from "../public/background.jpg";
 import Image from "next/image";
 import { useState } from "react";
 import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
 import { db } from "../firebase-config";
 import { useRouter } from "next/router";
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [fullName, setFullName] = useState("");
