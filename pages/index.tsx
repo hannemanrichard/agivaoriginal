@@ -262,15 +262,15 @@ export default function Home() {
                         <p className="text-white mr-3 my-6 text-lg text-center">
                           50% تخفيض
                         </p>
-                        <p className="flex justify-center">
-                          <span className="text-6xl text-green-500 font-bold">
+                        <p className="sm:flex block text-center justify-center">
+                          <span className="text-6xl text-green-500 font-bold  block sm:inline">
                             1900 DA
                           </span>
-                          <span className="text-gray-50 text-lg line-through">
+                          <span className="text-gray-50 text-lg line-through block sm:inline">
                             3800 DA
                           </span>
                         </p>
-                        <p className="text-center text-3xl text-white">
+                        <p className="text-center text-3xl text-white ">
                           التوصيل مجاني
                         </p>
                       </div>
