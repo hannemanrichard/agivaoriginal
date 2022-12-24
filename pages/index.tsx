@@ -31,7 +31,6 @@ export default function Home() {
           province,
           number,
           timestamp: serverTimestamp(),
-          offer: offerValue,
         });
 
         router.push("/thankyou");
@@ -110,16 +109,6 @@ export default function Home() {
             </h6>
           </div>
 
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/sCT5THD_Qiw"
-            className="w-full  rounded-2xl overflow-hidden md:hidden mb-4"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
           <div className="grid gap-12 md:grid-cols-2">
             <div className="w-full hidden md:block">
               <iframe
@@ -191,10 +180,10 @@ export default function Home() {
                 id="form"
               >
                 <h1 className="text-3xl text-white font-bold text-center">
-                  أطلب الآن
+                  (50% PROMO) أطلب الآن واستفد من عرض نهاية السنة{" "}
                 </h1>
                 <h3 className="text-lg text-white text-center">
-                  للطلب يرجى ملأ هذا النموذج وسوف نتصل بك لتاكيد{" "}
+                  للطلب يرجى ملء هذا النموذج وسوف نتصل بك للتاكيد{" "}
                 </h3>
                 <form action="#" method="post">
                   <div>
@@ -268,51 +257,26 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label className="label w-full text-right block mt-3">
-                      <span className="label-text text-white">العرض</span>
-                    </label>
-
                     <div>
-                      <div className="flex justify-end">
-                        <p className="text-white text-right mr-3">
-                          (3800 DA) %زيت اللحية مع تخفيض 25
+                      <div className="">
+                        <p className="text-white mr-3 my-6 text-lg text-center">
+                          50% تخفيض
                         </p>
-                        <input
-                          type="radio"
-                          value="oil"
-                          checked={offer === 1}
-                          name="offer"
-                          onClick={(e) => setOffer(1)}
-                        />{" "}
-                      </div>
-                      <div className="flex justify-end">
-                        <p className="text-white text-right mr-3">
-                          (5800 DA) زيت اللحية + شامبوا و توصيل مجاني
+                        <p className="flex justify-center">
+                          <span className="text-6xl text-green-500 font-bold">
+                            1900 DA
+                          </span>
+                          <span className="text-gray-50 text-lg line-through">
+                            3800 DA
+                          </span>
                         </p>
-                        <input
-                          type="radio"
-                          value="oil_champ"
-                          name="offer"
-                          checked={offer === 2}
-                          onClick={(e) => setOffer(2)}
-                        />{" "}
+                        <p className="text-center text-3xl text-white">
+                          التوصيل مجاني
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <div className="py-4 border-b border-white/20">
-                    <div className="flex justify-between text-white">
-                      {offer == 1 ? <p>3800 DA</p> : <p>5800 DA</p>}
-                      <p>سعر الطلبية</p>
-                    </div>
-                    <div className="flex justify-between text-white">
-                      {offer == 1 ? <p>600 DA</p> : <p>0 DA</p>}
-                      <p>سعر التوصيل</p>
-                    </div>
-                  </div>
-                  <div className="flex justify-between  text-xl mt-2 text-white">
-                    {offer == 1 ? <p>4400 DA</p> : <p>5800 DA</p>}
-                    <p>السعر الإجمالي</p>
-                  </div>
+
                   <div>
                     {formErr && (
                       <p className="text-center text-white bg-red-600/60 py-3 rounded-lg mt-4">
@@ -332,6 +296,16 @@ export default function Home() {
                   </div>
                 </form>
               </div>
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/sCT5THD_Qiw"
+                className="w-full  rounded-2xl overflow-hidden md:hidden mt-4"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
             <div className="w-full block md:hidden">
               {/* <iframe
