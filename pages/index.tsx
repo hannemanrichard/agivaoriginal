@@ -78,6 +78,7 @@ export default function Home() {
         style={{
           backgroundImage: `url(${bg.src})`,
           // backgroundSize: "100%",
+          backgroundRepeat: "repeat",
           backgroundAttachment: "fixed",
           backgroundColor: "#333",
           backgroundBlendMode: "overlay",
@@ -108,25 +109,27 @@ export default function Home() {
               اللحية بشكل صحي وملئ الفراغات
             </h6>
           </div>
+
           <iframe
-            src="https://player.vimeo.com/video/783998584?h=8d05ccf298"
-            // width="640"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/sCT5THD_Qiw"
             className="w-full  rounded-2xl overflow-hidden md:hidden mb-4"
-            height="360"
+            title="YouTube video player"
             frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-
           <div className="grid gap-12 md:grid-cols-2">
             <div className="w-full hidden md:block">
               <iframe
-                // width="560"
-                height="215"
-                className="w-full  rounded-2xl overflow-hidden"
-                src="https://player.vimeo.com/video/783998584?h=8d05ccf298"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/sCT5THD_Qiw"
+                className="w-full  rounded-2xl overflow-hidden mb-4"
+                title="YouTube video player"
                 frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
               <div className="text-white text-right mt-4">
@@ -384,7 +387,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex justify-end my-6">
-                <img src="/results.png" />
+                <img src="testm.jpg" />
               </div>
               <div className="text-white text-right mt-8 mb-6">
                 <h1 className="text-xl mb-2">:طريقة الإستعمال </h1>
