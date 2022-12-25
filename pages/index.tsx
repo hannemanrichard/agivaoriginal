@@ -31,6 +31,7 @@ export default function Home() {
           province,
           number,
           timestamp: serverTimestamp(),
+          version: 2.0,
         });
 
         router.push("/thankyou");
@@ -72,7 +73,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="facebook-domain-verification"
-          content="nx6uohcx438wbufzho93zzmg3ffzmw"
+          content="dd8nbk6kjjste9saokbjo5utze0hh8"
         />
         <link rel="icon" href="/favicon.webp" />
       </Head>
@@ -184,7 +185,7 @@ export default function Home() {
                 id="form"
               >
                 <h1 className="text-3xl text-white font-bold text-center">
-                  (50% PROMO) أطلب الآن واستفد من عرض نهاية السنة{" "}
+                  (35% PROMO) أطلب الآن واستفد من عرض نهاية السنة{" "}
                 </h1>
                 <h3 className="text-lg text-white text-center">
                   للطلب يرجى ملء هذا النموذج وسوف نتصل بك للتاكيد{" "}
@@ -264,18 +265,18 @@ export default function Home() {
                     <div>
                       <div className="">
                         <p className="text-white mr-3 my-6 text-lg text-center">
-                          50% تخفيض
+                          35% تخفيض
                         </p>
                         <p className="sm:flex block text-center justify-center">
                           <span className="text-6xl text-green-500 font-bold  block sm:inline">
-                            1900 DA
+                            3800 DA
                           </span>
                           <span className="text-gray-50 text-lg line-through block sm:inline">
-                            3800 DA
+                            5900 DA
                           </span>
                         </p>
                         <p className="text-center text-3xl text-white ">
-                          التوصيل مجاني
+                          (500DA) التوصيل لجميع الولايات
                         </p>
                       </div>
                     </div>
