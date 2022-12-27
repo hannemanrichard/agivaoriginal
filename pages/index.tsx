@@ -73,7 +73,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="facebook-domain-verification"
-          content="dd8nbk6kjjste9saokbjo5utze0hh8"
+          content="0vk93c3g54k368ks9wwwse3tdnxtow"
         />
         <link rel="icon" href="/favicon.webp" />
       </Head>
@@ -269,14 +269,11 @@ export default function Home() {
                         </p>
                         <p className="sm:flex block text-center justify-center">
                           <span className="text-6xl text-green-500 font-bold  block sm:inline">
-                            3800 DA
+                            2900 DA
                           </span>
                           <span className="text-gray-50 text-lg line-through block sm:inline">
-                            5900 DA
+                            4450 DA
                           </span>
-                        </p>
-                        <p className="text-center text-3xl text-white ">
-                          (500DA) التوصيل لجميع الولايات
                         </p>
                       </div>
                     </div>
