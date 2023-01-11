@@ -16,12 +16,14 @@ export default function Home() {
   const [numberErr, setNumberErr] = useState(false);
   const [provinceErr, setProvinceErr] = useState(false);
   const [formErr, setFormErr] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleAddLead = async (e: any) => {
     e.preventDefault();
     if (fullName !== "" && province !== "" && number !== "") {
       try {
+        setIsLoading(true);
         const leadsRef = collection(db, "leads");
         const offerValue = offer === 2 ? "oil + champoing" : "oil";
         setFormErr(false);
@@ -37,6 +39,8 @@ export default function Home() {
         router.push("/thankyou");
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     } else {
       setFormErr(true);
@@ -290,10 +294,11 @@ export default function Home() {
                     <button
                       // disabled={!fullName || !number || !province}
                       onClick={handleAddLead}
+                      disabled={isLoading}
                       type="submit"
                       className="bg-[#dc111f] button-bounce text-2xl rounded-lg w-full p-4 text-center text-white font-bold hover:bg-[#cf0c19]"
                     >
-                      أطلب الآن
+                      {isLoading && <span className="loader"></span>}أطلب الآن
                     </button>
                   </div>
                 </form>
