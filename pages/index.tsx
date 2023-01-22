@@ -6,6 +6,7 @@ import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
 import { db } from "../firebase-config";
 import { useRouter } from "next/router";
 
+import Countdown from "react-countdown";
 export default function Home() {
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
@@ -18,6 +19,56 @@ export default function Home() {
   const [formErr, setFormErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  const Completionist = () => <span>You are good to go!</span>;
+
+  // Renderer callback with condition
+  const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
+    if (completed) {
+      // Render a completed state
+      return <Completionist />;
+    } else {
+      // Render a countdown
+      return (
+        <div className="w-full flex justify-center">
+          <span className="flex mt-4">
+            <span>
+              <span className="h-16 mr-1 rounded-tl-md rounded-tr-md w-16 flex justify-center items-center bg-red-600 text-white text-5xl">
+                {days}
+              </span>
+              <span className="w-16 flex rounded-bl-md rounded-br-md justify-center bg-white">
+                يوم
+              </span>
+            </span>
+            <span>
+              <span className="h-16 mr-1 rounded-tl-md rounded-tr-md w-16 flex justify-center items-center bg-red-600 text-white text-5xl">
+                {hours}
+              </span>
+              <span className="w-16 flex rounded-bl-md rounded-br-md justify-center bg-white">
+                ساعة
+              </span>
+            </span>
+            <span>
+              <span className="h-16 mr-1 rounded-tl-md rounded-tr-md w-16 flex justify-center items-center bg-red-600 text-white text-5xl">
+                {minutes}
+              </span>
+              <span className="w-16 flex rounded-bl-md rounded-br-md justify-center bg-white">
+                دقيقة
+              </span>
+            </span>
+            <span>
+              <span className="h-16 mr-1 rounded-tl-md rounded-tr-md w-16 flex justify-center items-center bg-red-600 text-white text-5xl">
+                {seconds}
+              </span>
+              <span className="w-16 flex rounded-bl-md rounded-br-md justify-center bg-white">
+                ثانية
+              </span>
+            </span>
+          </span>
+        </div>
+      );
+    }
+  };
 
   const handleAddLead = async (e: any) => {
     e.preventDefault();
@@ -191,6 +242,16 @@ export default function Home() {
                 <h1 className="text-3xl text-white font-bold text-center">
                   (30% PROMO) أطلب الآن واستفد من عرض بداية السنة{" "}
                 </h1>
+
+                <div className="  my-4 py-4 rounded-lg bg-white/5">
+                  <h1 className="text-2xl text-red-500 text-center">
+                    العرض ينتهي خلال
+                  </h1>
+                  <Countdown
+                    date={new Date("2023-01-25T00:00:00")}
+                    renderer={renderer}
+                  />
+                </div>
                 <h3 className="text-lg text-white text-center">
                   للطلب يرجى ملء هذا النموذج وسوف نتصل بك للتاكيد{" "}
                 </h3>
@@ -219,7 +280,7 @@ export default function Home() {
                       <span className="label-text text-white">رقم الهاتف</span>
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="p-3 mt-2 bg-white rounded-md w-full  text-right"
                       placeholder="رقم الهاتف"
                       value={number}
