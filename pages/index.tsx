@@ -37,7 +37,7 @@ export default function Home() {
                 {days}
               </span>
               <span className="w-16 flex rounded-bl-md rounded-br-md justify-center bg-white">
-                يوم
+                أيام
               </span>
             </span>
             <span>
@@ -248,7 +248,7 @@ export default function Home() {
                     العرض ينتهي خلال
                   </h1>
                   <Countdown
-                    date={new Date("2023-01-25T00:00:00")}
+                    date={new Date("2023-01-26T00:00:00")}
                     renderer={renderer}
                   />
                 </div>
