@@ -210,7 +210,7 @@ export default function Home() {
                     </span>
                   </div>
                   <div className="flex text-right w-full justify-end mt-3">
-                    <span> زيت اللوز يقوي من شعر اللحية</span>
+                    <span> زيت الجوجوبا يرطب اللحية</span>
                     <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
                       3
                     </span>
@@ -415,7 +415,7 @@ export default function Home() {
                     </span>
                   </div>
                   <div className="flex text-right w-full justify-end mt-3">
-                    <span> زيت اللوز يقوي من شعر اللحية</span>
+                    <span> زيت الجوجوبا يرطب اللحية</span>
                     <span className=" h-6 w-6 text-black pt-0 pr-0 ml-3 items-center text-center rounded-full bg-white">
                       3
                     </span>
