@@ -248,7 +248,7 @@ export default function Home() {
                     العرض ينتهي خلال
                   </h1>
                   <Countdown
-                    date={new Date("2023-01-26T00:00:00")}
+                    date={new Date("2023-01-28T00:00:00")}
                     renderer={renderer}
                   />
                 </div>
