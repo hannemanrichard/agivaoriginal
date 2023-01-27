@@ -240,7 +240,8 @@ export default function Home() {
                 id="form"
               >
                 <h1 className="text-3xl text-white font-bold text-center">
-                  (30% PROMO) أطلب الآن واستفد من عرض بداية السنة{" "}
+                  <span className="text-red-500">(30% PROMO)</span> <br />
+                  أطلب الآن واستفد من عرض بداية السنة{" "}
                 </h1>
 
                 <div className="  my-4 py-4 rounded-lg bg-white/5">
@@ -248,7 +249,7 @@ export default function Home() {
                     العرض ينتهي خلال
                   </h1>
                   <Countdown
-                    date={new Date("2023-01-28T00:00:00")}
+                    date={new Date("2023-01-31T00:00:00")}
                     renderer={renderer}
                   />
                 </div>
