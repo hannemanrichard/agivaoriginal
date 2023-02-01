@@ -1,7 +1,8 @@
 import Head from "next/head";
+import axios from "axios";
 import bg from "../public/background.jpg";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
 import { db } from "../firebase-config";
 import { useRouter } from "next/router";
@@ -16,12 +17,120 @@ export default function Home() {
   const [nameErr, setNameErr] = useState(false);
   const [numberErr, setNumberErr] = useState(false);
   const [provinceErr, setProvinceErr] = useState(false);
+  const [communeErr, setCommuneErr] = useState(false);
+  const [commune, setCommune] = useState("");
+  const [communes, setCommunes] = useState([
+    { value: "Adrar", label: "Adrar - أدرار" },
+    { value: "Akabli", label: "Akabli - اقبلي" },
+    { value: "Aougrout", label: "Aougrout - أوقروت" },
+    { value: "Aoulef", label: "Aoulef - أولف" },
+    {
+      value: "Bordj Badji Mokhtar",
+      label: "Bordj Badji Mokhtar - برج باجي مختار",
+    },
+    { value: "Bouda", label: "Bouda - بودة" },
+    { value: "Charouine", label: "Charouine - شروين" },
+    { value: "Deldoul", label: "Deldoul - دلدول" },
+    { value: "Fenoughil", label: "Fenoughil - فنوغيل" },
+    { value: "In Zghmir", label: "In Zghmir - انزجمير" },
+    { value: "Ksar Kaddour", label: "Ksar Kaddour - قصر قدور" },
+    { value: "Metarfa", label: "Metarfa - المطارفة" },
+    {
+      value: "Ouled Ahmed Tammi",
+      label: "Ouled Ahmed Timmi - أولاد أحمد تيمي",
+    },
+    { value: "Ouled Aïssa", label: "Ouled Aissa - أولاد عيسى" },
+    { value: "Ouled Saïd", label: "Ouled Said - أولاد سعيد" },
+    { value: "Reggane", label: "Reggane - رقان" },
+    { value: "Sali", label: "Sali - سالي" },
+    { value: "Sebaa", label: "Sebaa - سبع" },
+    { value: "Talmine", label: "Talmine - طلمين" },
+    { value: "Tamantit", label: "Tamantit - تمنطيط" },
+    { value: "Tamekten", label: "Timekten - تيمقطن" },
+    { value: "Tamest", label: "Tamest - تامست" },
+    { value: "Timiaouine", label: "Timiaouine - تيمياوين" },
+    { value: "Timimoun", label: "Timimoun - تيميمون" },
+    { value: "Tinerkouk", label: "Tinerkouk - تينركوك" },
+    { value: "Tit", label: "Tit - تيط" },
+    { value: "Tsabit", label: "Tsabit - تسابيت" },
+    { value: "Zaouiet Kounta", label: "Zaouiet Kounta - زاوية كنتة" },
+  ]);
   const [formErr, setFormErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
+  useEffect(() => console.log(communes), []);
+  useEffect(() => {
+    console.log("new wilaya:", province);
+    const fetch = async () => {
+      if (province !== "") {
+        const getCommunes = await axios({
+          url: `http://localhost:3000`,
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          data: {
+            wilaya: province,
+          },
+        });
+        setCommunes(getCommunes.data.communes);
+        console.log("the new communes: ", getCommunes.data);
+      }
+    };
+    fetch();
+  }, [province]);
   const Completionist = () => <span>You are good to go!</span>;
-
+  const wilayas = [
+    { value: "Adrar", label: "(1) Adrar - أدرار" },
+    { value: "Chlef", label: "(2) Chlef - الشلف" },
+    { value: "Laghouat", label: "(3) Laghouat - الأغواط" },
+    { value: "Oum el Bouaghi", label: "(4) Oum El Bouaghi - أم البواقي" },
+    { value: "Batna", label: "(5) Batna - باتنة" },
+    { value: "Béjaïa", label: "(6) Bejaia - بجاية" },
+    { value: "Biskra", label: "(7) Biskra - بسكرة" },
+    { value: "Béchar", label: "(8) Bechar - بشار" },
+    { value: "Blida", label: "(9) Blida - البليدة" },
+    { value: "Bouira", label: "(10) Bouira - البويرة" },
+    { value: "Tamanrasset", label: "(11) Tamanrasset - تامنغست" },
+    { value: "Tébessa", label: "(12) Tebessa - تبسة" },
+    { value: "Tlemcen", label: "(13) Tlemcen - تلمسان" },
+    { value: "Tiaret", label: "(14) Tiaret - تيارت" },
+    { value: "Tizi Ouzou", label: "(15) Tizi ouzou - تيزي وزو" },
+    { value: "Alger", label: "(16) Alger - الجزائر" },
+    { value: "Djelfa", label: "(17) Djelfa - الجلفة" },
+    { value: "Jijel", label: "(18) Jijel - جيجل" },
+    { value: "Sétif", label: "(19) Setif - سطيف" },
+    { value: "Saïda", label: "(20) Saida - سعيدة" },
+    { value: "Skikda", label: "(21) Skikda - سكيكدة" },
+    { value: "Sidi Bel Abbes", label: "(22) Sidi Bel Abbes - سيدي بلعباس" },
+    { value: "Annaba", label: "(23) Annaba - عنابة" },
+    { value: "Guelma", label: "(24) Guelma - قالمة" },
+    { value: "Constantine", label: "(25) Constantine - قسنطينة" },
+    { value: "Médéa", label: "(26) Medea - المدية" },
+    { value: "Mostaganem", label: "(27) Mostaganem - مستغانم" },
+    { value: "M'Sila", label: "(28) M'sila - المسيلة" },
+    { value: "Mascara", label: "(29) Mascara - معسكر" },
+    { value: "Ouargla", label: "(30) Ouargla - ورقلة" },
+    { value: "Oran", label: "(31) Oran - وهران" },
+    { value: "El Bayadh", label: "(32) El Bayadh - البيض" },
+    { value: "Illizi", label: "(33) Illizi - إيليزي" },
+    {
+      value: "Bordj Bou Arreridj",
+      label: "(34) Bordj Bou Arreridj - برج بوعريرج",
+    },
+    { value: "Boumerdes", label: "(35) Boumerdes - بومرداس" },
+    { value: "El Tarf", label: "(36) El Tarf - الطارف" },
+    { value: "Tindouf", label: "(37) Tindouf - تندوف" },
+    { value: "Tissemsilt", label: "(38) Tissemsilt - تيسمسيلت" },
+    { value: "El Oued", label: "(39) El Oued - الوادي" },
+    { value: "Khenchela", label: "(40) Khenchela - خنشلة" },
+    { value: "Souk Ahras", label: "(41) Souk Ahras - سوق أهراس" },
+    { value: "Tipaza", label: "(42) Tipaza - تيبازة" },
+    { value: "Mila", label: "(43) Mila - ميلة" },
+    { value: "Aïn Defla", label: "(44) Ain Defla - عين الدفلة" },
+    { value: "Naâma", label: "(45) Naama - النعامة" },
+    { value: "Aïn Témouchent", label: "(46) Ain Temouchent - عين تيموشنت" },
+    { value: "Ghardaïa", label: "(47) Ghardaia - غرداية" },
+    { value: "Relizane", label: "(48) Relizane - غليزان" },
+  ];
   // Renderer callback with condition
   const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
     if (completed) {
@@ -72,7 +181,7 @@ export default function Home() {
 
   const handleAddLead = async (e: any) => {
     e.preventDefault();
-    if (fullName !== "" && province !== "" && number !== "") {
+    if (fullName !== "" && province !== "" && commune !== "" && number !== "") {
       try {
         setIsLoading(true);
         const leadsRef = collection(db, "leads");
@@ -80,7 +189,7 @@ export default function Home() {
         setFormErr(false);
         await addDoc(leadsRef, {
           fullName,
-          address,
+          commune,
           province,
           number,
           timestamp: serverTimestamp(),
@@ -116,6 +225,12 @@ export default function Home() {
         setProvinceErr(true);
       } else {
         setProvinceErr(false);
+      }
+    } else if (field === "commune") {
+      if (commune === "") {
+        setCommuneErr(true);
+      } else {
+        setCommuneErr(false);
       }
     }
   };
@@ -249,7 +364,7 @@ export default function Home() {
                     العرض ينتهي خلال
                   </h1>
                   <Countdown
-                    date={new Date("2023-02-02T00:00:00")}
+                    date={new Date("2023-02-05T00:00:00")}
                     renderer={renderer}
                   />
                 </div>
@@ -295,19 +410,30 @@ export default function Home() {
                       </p>
                     )}
                   </div>
+
                   <div>
                     <label className="label w-full text-right block mt-3">
                       <span className="label-text text-white">الولاية</span>
                     </label>
-                    <input
-                      type="text"
-                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
-                      placeholder="الولاية"
+
+                    <select
                       value={province}
+                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
                       onBlur={() => handleSetError("province")}
+                      onChange={(e) => {
+                        setProvince(e.target.value);
+                      }}
                       required
-                      onChange={(e) => setProvince(e.target.value)}
-                    />
+                    >
+                      <option value="">
+                        ---------- إختر الولاية -----------
+                      </option>
+                      {wilayas.map((wil: any, key: any) => (
+                        <option key={key} value={wil.value}>
+                          {wil.label}
+                        </option>
+                      ))}
+                    </select>
                     {provinceErr && (
                       <p className="text-right text-red-600">
                         الرجاء إدخال الولاية
@@ -315,6 +441,35 @@ export default function Home() {
                     )}
                   </div>
                   <div>
+                    <label className="label w-full text-right block mt-3">
+                      <span className="label-text text-white">البلدية</span>
+                    </label>
+
+                    <select
+                      value={commune}
+                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
+                      onBlur={() => handleSetError("commune")}
+                      onChange={(e) => {
+                        setCommune(e.target.value);
+                      }}
+                      required
+                    >
+                      <option value="">
+                        ---------- إختر البلدية -----------
+                      </option>
+                      {communes.map((com: any, key: any) => (
+                        <option key={key} value={com.value}>
+                          {com.label}
+                        </option>
+                      ))}
+                    </select>
+                    {communeErr && (
+                      <p className="text-right text-red-600">
+                        الرجاء إدخال البلدية
+                      </p>
+                    )}
+                  </div>
+                  {/* <div>
                     <label className="label w-full text-right block mt-3">
                       <span className="label-text text-white">العنوان</span>
                     </label>
@@ -325,7 +480,7 @@ export default function Home() {
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />
-                  </div>
+                  </div> */}
 
                   <div>
                     <div>
