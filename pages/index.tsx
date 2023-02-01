@@ -64,7 +64,7 @@ export default function Home() {
     const fetch = async () => {
       if (province !== "") {
         const getCommunes = await axios({
-          url: `http://localhost:3000`,
+          url: `https://province-api.onrender.com/`,
           method: "post",
           headers: { "Content-Type": "application/json" },
           data: {
