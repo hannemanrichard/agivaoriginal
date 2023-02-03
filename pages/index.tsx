@@ -440,35 +440,38 @@ export default function Home() {
                       </p>
                     )}
                   </div>
-                  <div>
-                    <label className="label w-full text-right block mt-3">
-                      <span className="label-text text-white">البلدية</span>
-                    </label>
+                  {province !== "" && (
+                    <div>
+                      <label className="label w-full text-right block mt-3">
+                        <span className="label-text text-white">البلدية</span>
+                      </label>
 
-                    <select
-                      value={commune}
-                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
-                      onBlur={() => handleSetError("commune")}
-                      onChange={(e) => {
-                        setCommune(e.target.value);
-                      }}
-                      required
-                    >
-                      <option value="">
-                        ---------- إختر البلدية -----------
-                      </option>
-                      {communes.map((com: any, key: any) => (
-                        <option key={key} value={com.value}>
-                          {com.label}
+                      <select
+                        value={commune}
+                        className="p-3 mt-2 bg-white rounded-md w-full text-right"
+                        onBlur={() => handleSetError("commune")}
+                        onChange={(e) => {
+                          setCommune(e.target.value);
+                        }}
+                        required
+                      >
+                        <option value="">
+                          ---------- إختر البلدية -----------
                         </option>
-                      ))}
-                    </select>
-                    {communeErr && (
-                      <p className="text-right text-red-600">
-                        الرجاء إدخال البلدية
-                      </p>
-                    )}
-                  </div>
+                        {communes.map((com: any, key: any) => (
+                          <option key={key} value={com.value}>
+                            {com.label}
+                          </option>
+                        ))}
+                      </select>
+                      {communeErr && (
+                        <p className="text-right text-red-600">
+                          الرجاء إدخال البلدية
+                        </p>
+                      )}
+                    </div>
+                  )}
+
                   {/* <div>
                     <label className="label w-full text-right block mt-3">
                       <span className="label-text text-white">العنوان</span>
