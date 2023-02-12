@@ -364,7 +364,7 @@ export default function Home() {
                     العرض ينتهي خلال
                   </h1>
                   <Countdown
-                    date={new Date("2023-02-08T00:00:00")}
+                    date={new Date("2023-02-16T00:00:00")}
                     renderer={renderer}
                   />
                 </div>
@@ -410,67 +410,45 @@ export default function Home() {
                       </p>
                     )}
                   </div>
-
                   <div>
                     <label className="label w-full text-right block mt-3">
                       <span className="label-text text-white">الولاية</span>
                     </label>
-
-                    <select
+                    <input
+                      type="text"
+                      className="p-3 mt-2 bg-white rounded-md w-full  text-right"
+                      placeholder="الولاية"
                       value={province}
-                      className="p-3 mt-2 bg-white rounded-md w-full text-right"
                       onBlur={() => handleSetError("province")}
-                      onChange={(e) => {
-                        setProvince(e.target.value);
-                      }}
                       required
-                    >
-                      <option value="">
-                        ---------- إختر الولاية -----------
-                      </option>
-                      {wilayas.map((wil: any, key: any) => (
-                        <option key={key} value={wil.value}>
-                          {wil.label}
-                        </option>
-                      ))}
-                    </select>
+                      onChange={(e) => setProvince(e.target.value)}
+                    />
                     {provinceErr && (
                       <p className="text-right text-red-600">
                         الرجاء إدخال الولاية
                       </p>
                     )}
                   </div>
-                  {province !== "" && (
-                    <div>
-                      <label className="label w-full text-right block mt-3">
-                        <span className="label-text text-white">البلدية</span>
-                      </label>
 
-                      <select
-                        value={commune}
-                        className="p-3 mt-2 bg-white rounded-md w-full text-right"
-                        onBlur={() => handleSetError("commune")}
-                        onChange={(e) => {
-                          setCommune(e.target.value);
-                        }}
-                        required
-                      >
-                        <option value="">
-                          ---------- إختر البلدية -----------
-                        </option>
-                        {communes.map((com: any, key: any) => (
-                          <option key={key} value={com.value}>
-                            {com.label}
-                          </option>
-                        ))}
-                      </select>
-                      {communeErr && (
-                        <p className="text-right text-red-600">
-                          الرجاء إدخال البلدية
-                        </p>
-                      )}
-                    </div>
-                  )}
+                  <div>
+                    <label className="label w-full text-right block mt-3">
+                      <span className="label-text text-white">البلدية</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="p-3 mt-2 bg-white rounded-md w-full  text-right"
+                      placeholder="البلدية"
+                      value={commune}
+                      onBlur={() => handleSetError("commune")}
+                      required
+                      onChange={(e) => setCommune(e.target.value)}
+                    />
+                    {communeErr && (
+                      <p className="text-right text-red-600">
+                        الرجاء إدخال البلدية
+                      </p>
+                    )}
+                  </div>
 
                   {/* <div>
                     <label className="label w-full text-right block mt-3">
