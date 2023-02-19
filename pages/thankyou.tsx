@@ -2,7 +2,6 @@ import Head from "next/head";
 import bg from "../public/bg.jpg";
 import Image from "next/image";
 import { useState } from "react";
-import { db } from "../supabase-config";
 import Link from "next/link";
 
 export default function ThankYou() {
