@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
     import("react-facebook-pixel")
       .then((x) => x.default)
       .then((ReactPixel) => {
-        ReactPixel.init("1376413936457231"); // facebookPixelId
+        ReactPixel.init("206168948759993"); // facebookPixelId
         ReactPixel.pageView();
 
         router.events.on("routeChangeComplete", () => {
@@ -21,18 +21,18 @@ export default function App({ Component, pageProps }: AppProps) {
       });
   }, [router.events]);
 
-  // useEffect(() => {
-  //   import("react-facebook-pixel")
-  //     .then((x) => x.default)
-  //     .then((ReactPixel) => {
-  //       ReactPixel.init("1376413936457231"); // facebookPixelId
-  //       ReactPixel.pageView();
+  useEffect(() => {
+    import("react-facebook-pixel")
+      .then((x) => x.default)
+      .then((ReactPixel) => {
+        ReactPixel.init("774883550292418"); // facebookPixelId
+        ReactPixel.pageView();
 
-  //       router.events.on("routeChangeComplete", () => {
-  //         ReactPixel.pageView();
-  //       });
-  //     });
-  // }, [router.events]);
+        router.events.on("routeChangeComplete", () => {
+          ReactPixel.pageView();
+        });
+      });
+  }, [router.events]);
 
   return (
     <>
