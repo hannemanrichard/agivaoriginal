@@ -171,7 +171,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="facebook-domain-verification"
-          content="0vk93c3g54k368ks9wwwse3tdnxtow"
+          content="1frq0jk9he9bwvamsmq20hol2keroj"
         />
         <link rel="icon" href="/favicon.webp" />
       </Head>
@@ -292,7 +292,7 @@ export default function Home() {
                     العرض ينتهي خلال
                   </h1>
                   <Countdown
-                    date={new Date("2023-02-28T00:00:00")}
+                    date={new Date("2023-03-06T00:00:00")}
                     renderer={renderer}
                   />
                 </div>
