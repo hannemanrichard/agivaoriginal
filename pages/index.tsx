@@ -283,19 +283,19 @@ export default function Home() {
                 id="form"
               >
                 <h1 className="text-3xl text-white font-bold text-center">
-                  <span className="text-red-500">(30% PROMO)</span> <br />
-                  أطلب الآن واستفد من عرض بداية السنة{" "}
+                  <span className="text-red-500">(35% PROMO)</span> <br />
+                  أطلب الآن واستفد من تخفيض شهر رمضان{" "}
                 </h1>
-
+                {/* 
                 <div className="  my-4 py-4 rounded-lg bg-white/5">
                   <h1 className="text-2xl text-red-500 text-center">
                     العرض ينتهي خلال
                   </h1>
                   <Countdown
-                    date={new Date("2023-03-06T00:00:00")}
+                    date={new Date("2023-03-15T00:00:00")}
                     renderer={renderer}
                   />
-                </div>
+                </div> */}
                 <h3 className="text-lg text-white text-center">
                   للطلب يرجى ملء هذا النموذج وسوف نتصل بك للتاكيد{" "}
                 </h3>
@@ -395,11 +395,11 @@ export default function Home() {
                     <div>
                       <div className="">
                         <p className="text-white mr-3 my-6 text-lg text-center">
-                          30% تخفيض
+                          35% تخفيض
                         </p>
                         <p className="sm:flex block text-center justify-center">
                           <span className="text-6xl text-green-500 font-bold  block sm:inline">
-                            3100 DA
+                            2900 DA
                           </span>
                           <span className="text-gray-50 text-lg line-through block sm:inline">
                             4450 DA
