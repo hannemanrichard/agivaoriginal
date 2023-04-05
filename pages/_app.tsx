@@ -34,6 +34,19 @@ export default function App({ Component, pageProps }: AppProps) {
       });
   }, [router.events]);
 
+  useEffect(() => {
+    import("react-facebook-pixel")
+      .then((x) => x.default)
+      .then((ReactPixel) => {
+        ReactPixel.init("1388539015311732"); // facebookPixelId
+        ReactPixel.pageView();
+
+        router.events.on("routeChangeComplete", () => {
+          ReactPixel.pageView();
+        });
+      });
+  }, [router.events]);
+
   return (
     <>
       <Script
