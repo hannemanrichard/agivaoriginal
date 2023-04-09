@@ -57,7 +57,7 @@ export default function ThankYou() {
                 <iframe
                   width="352"
                   height="626"
-                  src="https://www.youtube.com/embed/SPIjRztI7Uo?autoplay=1&mute=1"
+                  src="https://www.youtube.com/embed/SPIjRztI7Uo"
                   title="7 avril 2023"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
