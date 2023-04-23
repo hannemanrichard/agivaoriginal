@@ -4,7 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 
-export default function ThankYou() {
+export default function TnkYou() {
+  const [muted, setMuted] = useState(true);
+  const handleToggleMute = () => setMuted((current) => !current);
   return (
     <>
       <Head>
@@ -18,7 +20,7 @@ export default function ThankYou() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className="bg-auto bg-no-repeat bg-center min-h-screen"
+        className="bg-auto  bg-center min-h-screen"
         style={{
           backgroundImage: `url(${bg.src})`,
           // backgroundSize: "100%",
@@ -44,26 +46,26 @@ export default function ThankYou() {
         </header>
         <main className="w-full  mt-20 px-6">
           <div className="w-full pt-4 pb-8 text-center text-white z-10 ">
-            <div className="pt-20 w-2/3 mx-auto">
+            <div className="pt-10 w-full md:w-2/3 mx-auto">
               <h1 className="text-5xl font-bold">تهانينا</h1>
               <div
                 style={{
                   position: "relative",
-                  paddingBottom: "100%",
-                  height: "100%",
+                  paddingBottom: "2rem",
+                  paddingTop: "2rem",
                   width: "100%",
                 }}
               >
-                <iframe
-                  width="352"
-                  height="626"
-                  src="https://www.youtube.com/embed/SPIjRztI7Uo"
-                  title="7 avril 2023"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="absolute top-0 left-0 bottom-0 w-full h-full"
-                ></iframe>
+                <video
+                  controls
+                  onTouchEnd={handleToggleMute}
+                  autoPlay
+                  loop
+                  muted={muted}
+                  className="w-full"
+                >
+                  <source src="thankyou.mp4" type="video/mp4" />
+                </video>
               </div>
 
               <h6 className="text-2xl">
