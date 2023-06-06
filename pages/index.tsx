@@ -117,7 +117,7 @@ export default function Home() {
           phone: `${number}`,
           wilaya: province,
           commune,
-          product: "زيت اللحية",
+          product: "beard_oil",
           agent_id: agentId,
         });
         if (error) {
